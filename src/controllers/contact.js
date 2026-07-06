@@ -23,4 +23,5 @@ const getContact = async (req, res) => {
     }
 }
 
+
 export {getContacts, getContact}

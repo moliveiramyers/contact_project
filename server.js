@@ -24,7 +24,9 @@ try {
 }
 
 
-
+app.get("/", (req, res) => {
+    res.send("Contacts API is running!");
+});
 
 app.listen(PORT, () => {
     console.log(`Server running at http://127.0.0.1:${PORT}`)
