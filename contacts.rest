@@ -3,3 +3,32 @@ GET http://localhost:3000/contacts
 
 ### Get one contact
 GET http://localhost:3000/contacts/6872f2d34e9d2b9c7f123456
+
+### Criar um novo contacto
+POST http://localhost:8080/contacts
+Content-Type: application/json
+
+{
+    "firstName": "Penelope",
+    "lastName": "Pereira",
+    "email": "p.pereira@gmail.com",
+    "favoriteColor": "rose",
+    "birthday": "2003-09-04"
+}
+
+
+### Atualizar um contacto existente (Substitua pelo ID do contacto criado)
+PUT http://localhost:8080/contacts/6a57ad3978583d9f08d1ff40
+Content-Type: application/json
+
+{
+    "firstName": "Jane",
+    "lastName": "Doeen",
+    "email": "jane.doe@doeen.com",
+    "favoriteColor": "Red",
+    "birthday": "1992-07-14"
+}
+
+
+### Eliminar um contacto
+DELETE http://localhost:8080/contacts/6a57ad3978583d9f08d1ff3f
