@@ -1,4 +1,4 @@
-import { getAllContacts, getContactById, addContact, deleteContact, updateContact } from "../modules/contacts.js";
+import { getAllContacts, getContactById, addContact, deleteContact, updateContact } from "../models/contacts.js";
 
 const getContacts = async (req, res) => {
     try {
