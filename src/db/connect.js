@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import { MongoClient } from "mongodb";
+import mongoose from 'mongoose'
 import dotenv from 'dotenv';
 
 import dns from 'dns';
@@ -7,32 +8,33 @@ dns.setServers(['8.8.8.8']);
 
 dotenv.config();
 
-let isConnected = false;
-// secret that connects to db
 const uri = process.env.MONGODB_URI;
 
-// connect to database
-export const connectDB = async () => {
-    if (isConnected) {
-        return
-    }
-    try {
-        const db = await mongoose.client.connect(uri);
-        console.log('Connected to dabase successfully');
-        isConnected = db.connection[0].readyState;
+const client = new MongoClient(uri);
 
+let db;
+// connect to database 
+const connectDB = async(req, res)=> {
+    try{
+        await client.connect();
+        console.log('Connected to dabase successfully');
+
+        db = client.db('contactsDB');
+
+        // connect mongoose
+        await mongoose.connect(uri, { dbName: 'contactsDB' });
+        console.log('✅ Connected to Mongoose successfully');
     } catch (error) {
         console.log(error);
     }
 
-};
-
+}
 
 const getDB = () => {
-    if (!isConnected) {
-        throw new Error("Database not initialized. Call connectDB first.");   
-    }
-    return mongoose.connection.db;
+    if (!db) {
+    throw Error('Db not initialized');
+  }
+    return db;
 }
 
 export { connectDB, getDB };
